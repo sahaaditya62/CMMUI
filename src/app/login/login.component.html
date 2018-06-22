@@ -1,0 +1,53 @@
+<div class="card  mt-5 pl-0 pr-0 card-outline-primary offset-xs-2 offset-sm-2 offset-md-2 offset-lg-3 col-xs-8 col-sm-8 col-md-8 col-lg-6">
+  <h3 class="card-header text-center card-primary text-white">
+    {{header}}
+  </h3>
+  <div class="card-block">
+    <p>
+      <ngb-alert *ngIf="!isValid" type="custom" [dismissible]="false">{{message}}</ngb-alert>
+    </p>
+    <form (ngSubmit)="login()" #loginForm="ngForm">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="userid"> Userid</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="text" name="userid" id="userid" [(ngModel)]="model.userId" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="password"> Password</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="password" name="password" id="password" [(ngModel)]="model.password" />
+        </div>
+      </div>
+      
+      <div class="offset-2 form-check">
+        <label class="form-check-label">
+          <input class=" form-check-input" type="radio" name="role" id="roleMineOps" (click)="changeOrg('MINE_OPS')" checked>
+          &nbsp;Mine Operations Manager
+        </label>
+      </div>
+      <div class="offset-2 form-check">
+        <label class="form-check-label">
+          <input class=" form-check-input" type="radio" name="role" id="roleShipRep"  (click)="changeOrg('SHIP_REP')" >&nbsp;Shipping Company Representative
+        </label>
+      </div>
+      <div class="offset-2 form-check">
+        <label class="form-check-label">
+          <input class=" form-check-input" type="radio" name="role" id="roleSmltOp" (click)="changeOrg('SMLT_OP') "  >&nbsp;Smelter Operations Manager
+        </label>
+      </div>
+            <div class="offset-2 form-check">
+        <label class="form-check-label">
+          <input class=" form-check-input" type="radio" name="role" id="roleAuditor" (click)="changeOrg('AUDITOR') " >&nbsp;Auditor/ End Customer
+        </label>
+      </div>
+      <div class="form-group row">
+
+        <button type="submit" class="btn btn-primary btn-lg offset-4 col-4 ">Login</button>
+
+      </div>
+
+    </form>
+
+  </div>
+</div>

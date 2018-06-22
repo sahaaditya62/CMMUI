@@ -1,0 +1,20 @@
+<nav *ngIf="showNavbar" class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+
+  <a class="navbar-brand" href="#">{{currentOrg.appTitle}}</a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav mr-auto">
+  </ul>
+  <ul class="navbar-nav" style="float:left">
+            <li *ngFor="let menu of currentOrg.menuList " class="nav-item">
+                <a class="nav-link" routerLink="{{menu.link}}">
+                    <img *ngIf="menu.icon.length>0" style="max-width:25px;max-height:25px" src="{{menu.icon}}"/>{{menu.description}}</a>
+            </li>
+            <li  class="nav-item">
+                <a class="nav-link" style="cursor: pointer;" (click)="logout(currentOrg.logout)">Log out</a>
+            </li>
+   </ul>
+  </div> 
+</nav>
+
+    
+

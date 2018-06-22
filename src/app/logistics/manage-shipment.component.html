@@ -1,0 +1,107 @@
+<h3 class="text-center">Manage shipments</h3>
+<div class="card  ml-1 mr-1 pl-0 pr-0 card-outline-primary">
+  <h3 class="card-header text-center card-warning text-white">
+        <h4 class='text-center card-title mt-2'>Existing Shipments&nbsp;<img  src="assets/bclogo.png" style="max-width: 25px;max-width: 25px" title="Hyperledger Fabric Transaction"/></h4></h3>
+  <div class="card-block">
+
+      <table class="table table-striped">
+        <thead class="thead-inverse">
+          
+          <th>Shipment number</th>
+          <th>Date</th>
+          <th>Source</th>
+          <th>Destination</th>
+          <th>Weight</th>
+          <th>Status</th>
+          <th>Action</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let record of recordList " >
+            
+            <td>{{record.shipmentNumber}}</td>
+            <td>{{record.date}}</td>
+            <td>{{record.shipSrc}}</td>
+            <td>{{record.shipDest}}</td>
+            <td>{{record.shipmentWt}}</td>
+            <td>{{record.status}}</td>
+            <td><button class="btn btn-warning" (click)="viewShipmentDetails(record.shipmentNumber)">View</button></td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</div>
+
+<div *ngIf ="viewDetails" class="card  ml-1 mr-1 pl-0 pr-0 card-outline-primary">
+  <h3 class="card-header text-center card-primary text-white">
+    Shipment details</h3>
+  <div class="card-block" (window:keyup)="genRandomData($event)">
+    <div class="form-group row">
+      <label for="shipmentNumber" class="col-2">Shipment Number</label>
+      <input readonly class="form-control col-3 ml-1 " type="text" id="shipmentNumber" name="shipmentNumber" [(ngModel)]="model.shipmentNumber"
+        placeholder="Shipment Number" required />
+      <label  for="date" class="col-3 ml-4">Date</label>
+      <input readonly class="form-control col-3 " type="text" id="date" name="date" [(ngModel)]="model.date" placeholder="Date" required
+      />
+    </div>
+    <div class="form-group row">
+      <label for="type" class="col-2">Shipment Type</label>
+      <select readonly name="type" [(ngModel)]="model.type" class="form-control col-3" id="type" required>
+          <option   [ngValue]="'Ore'" >Ore</option>
+	    </select>
+      <label for="oreType" class="col-3 ml-4">Precise Identification of Ore </label>
+      <select readonly name="oreType" [(ngModel)]="model.oreType" class="form-control col-3" id="oreType" required>
+          <option   [ngValue]="'Cassiterite'" >Cassiterite</option>
+          <option   [ngValue]="'Wolframite'" >Wolframite</option>
+          <option   [ngValue]="'Scheelite'" >Scheelite</option>
+          <option   [ngValue]="'Ferberite'" >Ferberite</option>
+          <option   [ngValue]="'Pyritic'" >Pyritic</option>
+          <option   [ngValue]="'Sylvanite'" >Sylvanite</option>
+          <option   [ngValue]="'Nagyagite'" >Nagyagite</option>
+          <option   [ngValue]="'Petzite'" >Petzite</option>
+          <option   [ngValue]="'Krennerite'" >Krennerite</option>
+          <option   [ngValue]="'Coltan'" >Coltan</option>
+	    </select>
+    </div>
+    <div class="form-group row">
+      <label for="src" class="col-2">Source of Ore</label>
+      <select readonly name="src" [(ngModel)]="model.srcMine" class="form-control col-3" id="src" required>
+          <option   [ngValue]="'Mine 1'" >Mine 1</option>
+          <option   [ngValue]="'Mine 2'" >Mine 2</option>
+          <option   [ngValue]="'Mine 3'" >Mine 3</option>
+	    </select>
+      <label for="shipingComp" class="col-3 ml-4">Shipping Company Name</label>
+      <input readonly class="form-control col-3 " type="text" id="shipingComp" name="shipingComp" [(ngModel)]="model.shipingComp" placeholder="Shipping Company" required />
+    </div>
+    <div class="form-group row">
+        <label for="shipType" class="col-2">Shipping Type</label>
+        <select readonly name="shipType" [(ngModel)]="model.shipType" class="form-control col-3" id="shipType" required>
+          <option   [ngValue]="'Rail'" >Rail</option>
+          <option   [ngValue]="'Surface'" >Surface</option>
+          <option   [ngValue]="'Sea'" >Sea</option>
+	      </select>
+        <label for="shipDest" class="col-3 ml-4">Destination</label>
+        <select readonly name="shipDest" [(ngModel)]="model.shipDest" class="form-control col-3" id="shipDest" required>
+          <option   [ngValue]="'Smelter 1'" >Smelter 1</option>
+          <option   [ngValue]="'Smelter 2'" >Smelter 2</option>
+          <option   [ngValue]="'Smelter 3'" >Smelter 3</option>
+	      </select>
+    </div>  
+    <div *ngIf="editEnabled" class="form-group row">
+      <label for="shipperRecvdWt" class="col-2">Confirm Weight</label>
+      <input class="form-control col-3 " type="text" id="shipperRecvdWt" name="shipperRecvdWt" [(ngModel)]="model.shipperRecvdWt" placeholder="Weight" required/>
+      <label for="vehicleId" class="col-3 ml-4">Vehicle Number</label>
+      <input class="form-control col-3 " type="text" id="vehicleId" name="vehicleId" [(ngModel)]="model.vehicleId" placeholder="Vehicle Number" required />
+    </div> 
+    <div *ngIf="!editEnabled" class="form-group row">
+      <label for="shipperRecvdWt" class="col-2">Confirm Weight</label>
+      <input readonly class="form-control col-3 " type="text" id="shipperRecvdWt" name="shipperRecvdWt" [(ngModel)]="model.shipperRecvdWt" placeholder="Weight" required/>
+      <label for="vehicleId" class="col-3 ml-4">Vehicle Number</label>
+      <input readonly class="form-control col-3 " type="text" id="vehicleId" name="vehicleId" [(ngModel)]="model.vehicleId" placeholder="Vehicle Number" required />
+    </div> 
+  </div>
+  <div class="form-group row">
+
+        <button *ngIf="editEnabled" type="button" class="btn btn-primary btn-lg offset-4 col-4 " (click)="acceptShipment()">Accept Shipment</button>
+        <button *ngIf="!editEnabled" type="button" class="btn btn-primary btn-lg offset-4 col-4 " (click)="deliverShipment()">Deliver Shipment</button>
+      </div>
+</div>

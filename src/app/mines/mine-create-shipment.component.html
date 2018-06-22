@@ -1,0 +1,76 @@
+<h3 class="text-center">Initiate a new shipment</h3>
+<div class="card  ml-1 mr-1 pl-0 pr-0 card-outline-primary">
+  <h3 class="card-header text-center card-primary text-white">
+    Shipment details</h3>
+  <div class="card-block" (window:keyup)="genRandomData($event)">
+    <div class="form-group row">
+      <label for="shipmentNumber" class="col-2">Shipment Number</label>
+      <input class="form-control col-3 ml-1 " type="text" id="shipmentNumber" name="shipmentNumber" [(ngModel)]="model.shipmentNumber"
+        placeholder="Shipment Number" required />
+      <label for="date" class="col-3 ml-4">Date</label>
+      <input class="form-control col-3 " type="text" id="date" name="date" [(ngModel)]="model.date" placeholder="DD-MMM-YYYY" required
+      />
+    </div>
+    <div class="form-group row">
+      <label for="type" class="col-2">Shipment Type</label>
+      <select name="type" [(ngModel)]="model.type" class="form-control col-3" id="type" required>
+          <option   [ngValue]="'Ore'" >Ore</option>
+	    </select>
+      <label for="oreType" class="col-3 ml-4">Precise Identification of Ore </label>
+      <select name="oreType" [(ngModel)]="model.oreType" class="form-control col-3" id="oreType" required>
+          <option   [ngValue]="'Cassiterite'" >Cassiterite</option>
+          <option   [ngValue]="'Wolframite'" >Wolframite</option>
+          <option   [ngValue]="'Scheelite'" >Scheelite</option>
+          <option   [ngValue]="'Ferberite'" >Ferberite</option>
+          <option   [ngValue]="'Pyritic'" >Pyritic</option>
+          <option   [ngValue]="'Sylvanite'" >Sylvanite</option>
+          <option   [ngValue]="'Nagyagite'" >Nagyagite</option>
+          <option   [ngValue]="'Petzite'" >Petzite</option>
+          <option   [ngValue]="'Krennerite'" >Krennerite</option>
+          <option   [ngValue]="'Coltan'" >Coltan</option>
+	    </select>
+    </div>
+    <div class="form-group row">
+      <label for="srcMine" class="col-2">Source of Ore</label>
+      <select name="srcMine" [(ngModel)]="model.srcMine" class="form-control col-3" id="srcMine" required>
+          <option   [ngValue]="'Mine 1'" >Mine 1</option>
+          <option   [ngValue]="'Mine 2'" >Mine 2</option>
+          <option   [ngValue]="'Mine 3'" >Mine 3</option>
+	    </select>
+      <label for="shipmentWt" class="col-3 ml-4">Weight of Shipment(Metric tons)</label>
+      <input class="form-control col-3 " type="text" id="shipmentWt" name="shipmentWt" [(ngModel)]="model.shipmentWt" placeholder="Shipment Weight"
+        required />
+    </div>
+    <div class="form-group row">
+      <label for="sealNumber" class="col-2">Seal Number</label>
+      <input class="form-control col-3 " type="text" id="sealNumber" name="sealNumber" [(ngModel)]="model.sealNumber" placeholder="Seal Number" required/>
+      <label for="shipingComp" class="col-3 ml-4">Shipping Company Name</label>
+      <input class="form-control col-3 " type="text" id="shipingComp" name="shipingComp" [(ngModel)]="model.shipingComp" placeholder="Shipping Company" required />
+    </div>  
+    <div class="form-group row">
+        <label for="shipType" class="col-2">Shipping Type</label>
+        <select name="shipType" [(ngModel)]="model.shipType" class="form-control col-3" id="shipType" required>
+          <option   [ngValue]="'Rail'" >Rail</option>
+          <option   [ngValue]="'Surface'" >Surface</option>
+          <option   [ngValue]="'Sea'" >Sea</option>
+	      </select>
+        <label for="shipDest" class="col-3 ml-4">Destination</label>
+        <select name="shipDest" [(ngModel)]="model.shipDest" class="form-control col-3" id="shipDest" required>
+          <option   [ngValue]="'Smelter 1'" >Smelter 1</option>
+          <option   [ngValue]="'Smelter 2'" >Smelter 2</option>
+          <option   [ngValue]="'Smelter 3'" >Smelter 3</option>
+	      </select>
+    </div>  
+    <div class="form-group row">
+      <label for="contractNumber" class="col-2">Contract Number</label>
+      <input class="form-control col-3 " type="text" id="contractNumber" name="contractNumber" [(ngModel)]="model.contractNumber" placeholder="Related Contract Number" required/>
+      <label for="expYield" class="col-3 ml-4">Expected Yield</label>
+      <input class="form-control col-1 " type="text" id="expYield" name="expYield" [(ngModel)]="model.expYield" placeholder="Expected Yield" required /><label>&nbsp;&nbsp; ounces / Metric tons</label>
+    </div> 
+  </div>
+  <div class="form-group row">
+
+        <button type="button" class="btn btn-primary btn-lg offset-4 col-4 " (click)="initShipment()">Initiate Shipment</button>
+
+      </div>
+</div>
